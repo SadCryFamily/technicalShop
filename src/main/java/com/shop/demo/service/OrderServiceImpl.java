@@ -1,6 +1,7 @@
 package com.shop.demo.service;
 
 import com.shop.demo.dto.CreateOrderDto;
+import com.shop.demo.dto.ViewOrderDto;
 import com.shop.demo.enitity.Order;
 import com.shop.demo.mapper.OrderMapper;
 import com.shop.demo.repository.OrderRepository;
@@ -10,7 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -38,5 +41,16 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
+
+    @Override
+    public List<ViewOrderDto> findAllOrders() {
+        List<Order> orders = orderRepository.findAll();
+
+        log.info("FOUND {} orders in db.", orders.size());
+
+        return orders.stream()
+                .map(order -> orderMapper.toViewOrderDto(order))
+                .collect(Collectors.toList());
     }
 }

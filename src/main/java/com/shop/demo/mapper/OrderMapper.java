@@ -1,6 +1,7 @@
 package com.shop.demo.mapper;
 
 import com.shop.demo.dto.CreateOrderDto;
+import com.shop.demo.dto.ViewOrderDto;
 import com.shop.demo.enitity.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -14,5 +15,10 @@ public interface OrderMapper {
     @Mapping(source = "name", target = "orderName")
     @Mapping(source = "quantity", target = "ordersQuantity")
     Order toOrder(CreateOrderDto orderDto);
+
+
+    @Mapping(target = "name", source = "orderName")
+    @Mapping(target = "quantity", source = "ordersQuantity")
+    ViewOrderDto toViewOrderDto(Order order);
 
 }
