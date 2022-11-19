@@ -13,6 +13,7 @@ public interface CustomerMapper {
 
     @Mapping(source = "name", target = "customerName")
     @Mapping(source = "email", target = "customerEmail")
+    @Mapping(source = "password", target = "customerPassword")
     Customer toCustomer(CreateCustomerDto customerDto);
 
 }

@@ -16,6 +16,10 @@
                 <constraints nullable="false" uniqueConstraintName="un_customer_name" unique="true"/>
             </column>
 
+            <column name="password" type="text">
+                <constraints nullable="false"/>
+            </column>
+
             <column name="email" type="text">
                 <constraints nullable="false" uniqueConstraintName="un_customer_email" unique="true"/>
             </column>
@@ -44,6 +48,46 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="Semen Gulenko">
+        <createTable tableName="roles">
+            <column name="id" type="bigserial">
+                <constraints primaryKeyName="pk_roles_id" primaryKey="true"/>
+            </column>
+
+            <column name="name" type="text">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="4" author="Semen Gulenko">
+        <createTable tableName="customer_roles">
+            <column name="id" type="bigserial">
+                <constraints primaryKeyName="pk_customer_roles_id" primaryKey="true"/>
+            </column>
+
+            <column name="customer_id" type="bigint">
+                <constraints foreignKeyName="fk_customer_id" references="customer(id)"/>
+            </column>
+
+            <column name="role_id" type="bigint">
+                <constraints foreignKeyName="fk_role_id" references="roles(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="6" author="Semen Gulenko">
+        <insert tableName="roles">
+            <column name="id" value="1"/>
+            <column name="name" value="ROLE_USER"/>
+        </insert>
+
+        <insert tableName="roles">
+            <column name="id" value="2"/>
+            <column name="name" value="ROLE_MODERATOR"/>
+        </insert>
     </changeSet>
 
 </databaseChangeLog>

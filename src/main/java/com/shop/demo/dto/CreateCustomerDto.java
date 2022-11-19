@@ -17,6 +17,10 @@ public class CreateCustomerDto {
     @Size(min = 10, message = "Name is too small.")
     private String name;
 
+    @NotNull
+    @Size(min = 8, message = "Password is too small.")
+    private String password;
+
     @Email
     @NotNull
     @Size(min = 10, message = "Email is too small.")
