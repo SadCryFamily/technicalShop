@@ -45,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
             optional.orElseThrow(RuntimeException::new);
         }
 
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        return ResponseEntity.ok().body("Successfuly created!");
     }
 
     @Override

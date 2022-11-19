@@ -1,8 +1,7 @@
-package com.shop.demo.auth.config;
+package com.shop.demo.config;
 
-import com.shop.demo.auth.config.jwt.AuthEntryPointJwt;
-import com.shop.demo.auth.config.jwt.AuthTokenFilter;
-import com.shop.demo.auth.entity.ERole;
+import com.shop.demo.config.jwt.AuthEntryPointJwt;
+import com.shop.demo.config.jwt.AuthTokenFilter;
 import com.shop.demo.auth.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -61,7 +60,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/signup**").permitAll()
                 .antMatchers("/signin").permitAll()
                 .antMatchers("/orders**").permitAll()
-                .antMatchers("/order").permitAll()
+                .antMatchers("/order**").permitAll()
                 .antMatchers("/order/**").permitAll()
                 .anyRequest().authenticated();
 

@@ -1,4 +1,4 @@
-package com.shop.demo.auth.config.jwt;
+package com.shop.demo.config.jwt;
 
 import com.shop.demo.auth.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

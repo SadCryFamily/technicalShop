@@ -1,5 +1,6 @@
 package com.shop.demo.dto;
 
+import com.shop.demo.auth.entity.Role;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Getter
 @NoArgsConstructor
@@ -25,5 +27,7 @@ public class CreateCustomerDto {
     @NotNull
     @Size(min = 10, message = "Email is too small.")
     private String email;
+
+    private Set<String> roles;
 
 }
