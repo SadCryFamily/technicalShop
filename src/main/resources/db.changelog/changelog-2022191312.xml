@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+
+    <changeSet id="1" author="Semen Gulenko">
+        <createTable tableName="customer">
+            <column name="id" type="bigserial">
+                <constraints primaryKeyName="pk_customer_id" primaryKey="true"/>
+            </column>
+
+            <column name="name" type="text">
+                <constraints nullable="false" uniqueConstraintName="un_customer_name" unique="true"/>
+            </column>
+
+            <column name="email" type="text">
+                <constraints nullable="false" uniqueConstraintName="un_customer_email" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="Semen Gulenko">
+        <createTable tableName="orders">
+            <column name="id" type="bigserial">
+                <constraints primaryKeyName="pk_orders_id" primaryKey="true"/>
+            </column>
+
+            <column name="name" type="text">
+                <constraints nullable="false" uniqueConstraintName="uk_order_name" unique="true"/>
+            </column>
+
+            <column name="quantity" type="bigint">
+                <constraints nullable="false" uniqueConstraintName="uk_order_quatity" unique="true"/>
+            </column>
+
+            <column name="is_payed" type="boolean">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
