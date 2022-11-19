@@ -13,6 +13,8 @@ public class ViewOrderDto {
 
     private String name;
 
+    private Long price;
+
     private Long quantity;
 
     private boolean isPayed;

@@ -13,11 +13,13 @@ public interface OrderMapper {
     OrderMapper INSTANCE = Mappers.getMapper(OrderMapper.class);
 
     @Mapping(source = "name", target = "orderName")
+    @Mapping(source = "price", target = "orderPrice")
     @Mapping(source = "quantity", target = "ordersQuantity")
     Order toOrder(CreateOrderDto orderDto);
 
 
     @Mapping(target = "name", source = "orderName")
+    @Mapping(target = "price", source = "orderPrice")
     @Mapping(target = "quantity", source = "ordersQuantity")
     ViewOrderDto toViewOrderDto(Order order);
 

@@ -23,6 +23,9 @@ public class Order {
     @Column(name = "name")
     private String orderName;
 
+    @Column(name = "price")
+    private Long orderPrice;
+
     @Column(name = "quantity")
     private Long ordersQuantity;
 

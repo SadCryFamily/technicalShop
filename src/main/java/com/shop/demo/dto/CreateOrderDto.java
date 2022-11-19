@@ -20,6 +20,9 @@ public class CreateOrderDto {
     private Long quantity;
 
     @NotNull
+    private Long price;
+
+    @NotNull
     private boolean isPayed;
 
 }

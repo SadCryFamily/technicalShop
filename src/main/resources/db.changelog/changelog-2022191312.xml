@@ -32,8 +32,12 @@
                 <constraints nullable="false" uniqueConstraintName="uk_order_name" unique="true"/>
             </column>
 
+            <column name="price" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+
             <column name="quantity" type="bigint">
-                <constraints nullable="false" uniqueConstraintName="uk_order_quatity" unique="true"/>
+                <constraints nullable="false"/>
             </column>
 
             <column name="is_payed" type="boolean">

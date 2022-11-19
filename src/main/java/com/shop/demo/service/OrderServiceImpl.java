@@ -32,6 +32,11 @@ public class OrderServiceImpl implements OrderService {
         if (optional.isPresent()) {
 
             Order order = orderMapper.toOrder(optional.get());
+
+            if (order.getOrdersQuantity() <= 0) {
+                throw new RuntimeException("Quantity must be lower than one.");
+            }
+
             orderRepository.save(order);
 
             log.info("CREATED Order[ID: {}, NAME: {}, QUANTITY: {}]",
