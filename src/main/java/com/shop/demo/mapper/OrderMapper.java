@@ -23,4 +23,9 @@ public interface OrderMapper {
     @Mapping(target = "quantity", source = "ordersQuantity")
     ViewOrderDto toViewOrderDto(Order order);
 
+    @Mapping(target = "name", source = "orderName")
+    @Mapping(target = "price", source = "orderPrice")
+    @Mapping(target = "quantity", source = "ordersQuantity")
+    CreateOrderDto toOrderDto(Order order);
+
 }

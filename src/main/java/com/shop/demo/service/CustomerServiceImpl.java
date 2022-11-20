@@ -1,5 +1,6 @@
 package com.shop.demo.service;
 
+import com.shop.demo.config.jwt.JwtUtils;
 import com.shop.demo.dto.ViewOrderDto;
 import com.shop.demo.enitity.Customer;
 import com.shop.demo.enitity.Order;
@@ -9,12 +10,9 @@ import com.shop.demo.repository.CustomerRepository;
 import com.shop.demo.repository.OrderRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -36,19 +34,13 @@ public class CustomerServiceImpl implements CustomerService {
     private OrderMapper orderMapper;
 
     @Autowired
-    private RestTemplate restTemplate;
+    private JwtUtils jwtUtils;
 
     @Override
     public ResponseEntity<ViewOrderDto> getAnOrder(String jwtToken, Long orderId){
-        String tokenUrl = "http://localhost:8080/token";
 
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Authorization", jwtToken);
-
-        HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
-
-        String expectedUsername = restTemplate.exchange(
-                tokenUrl, HttpMethod.GET, entity, String.class).getBody();
+        String expectedUsername =
+                jwtUtils.getUserNameFromJwtToken(jwtToken.substring(7));
 
         ViewOrderDto expectedViewDto = null;
 
@@ -77,17 +69,11 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
+    @Transactional
     public ResponseEntity<?> makeAnOrder(String jwtToken, Long orderId) {
 
-        String tokenUrl = "http://localhost:8080/token";
-
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Authorization", jwtToken);
-
-        HttpEntity<String> entity = new HttpEntity<String>(httpHeaders);
-
-        String expectedUsername = restTemplate.exchange(
-                tokenUrl, HttpMethod.GET, entity, String.class).getBody();
+        String expectedUsername =
+                jwtUtils.getUserNameFromJwtToken(jwtToken.substring(7));
 
         if (customerRepository.existsByCustomerName(expectedUsername)) {
             Customer customer =
@@ -116,15 +102,9 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public ResponseEntity<ViewOrderDto> payAnOrder(String jwtToken, Long orderId) {
-        String tokenUrl = "http://localhost:8080/token";
 
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.set("Authorization", jwtToken);
-
-        HttpEntity<String> entity = new HttpEntity<String>(httpHeaders);
-
-        String expectedUsername = restTemplate.exchange(
-                tokenUrl, HttpMethod.GET, entity, String.class).getBody();
+        String expectedUsername =
+                jwtUtils.getUserNameFromJwtToken(jwtToken.substring(7));
 
         ViewOrderDto viewOrderDto = null;
 

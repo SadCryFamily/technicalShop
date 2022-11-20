@@ -1,19 +1,15 @@
 package com.shop.demo.enitity;
 
 import com.shop.demo.auth.entity.Role;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "customer")
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -33,7 +29,7 @@ public class Customer {
     @Column(name = "password")
     private String customerPassword;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "customer_roles",
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))

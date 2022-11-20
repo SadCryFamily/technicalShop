@@ -22,6 +22,10 @@
 		<postgresql.version>42.5.0</postgresql.version>
 		<starter-validation.version>2.7.3</starter-validation.version>
 		<starter-web.version>2.7.4</starter-web.version>
+		<scheduler.version>3.1.2</scheduler.version>
+		<json-token.version>0.9.1</json-token.version>
+		<security-starter.version>2.7.5</security-starter.version>
+		<common-lang.version>3.0</common-lang.version>
 	</properties>
 
 	<dependencies>
@@ -76,25 +80,25 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-			<version>2.7.5</version>
+			<version>${security-starter.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
-			<version>0.9.1</version>
+			<version>${json-token.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.0</version>
+			<version>${common-lang.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.awaitility</groupId>
 			<artifactId>awaitility</artifactId>
-			<version>3.1.2</version>
+			<version>${scheduler.version}</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -104,7 +108,12 @@
 			<version>${lombok.version}</version>
 			<scope>provided</scope>
 		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
 	<build>
 		<plugins>

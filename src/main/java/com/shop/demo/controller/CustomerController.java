@@ -1,6 +1,5 @@
 package com.shop.demo.controller;
 
-import com.shop.demo.config.jwt.JwtUtils;
 import com.shop.demo.dto.ViewOrderDto;
 import com.shop.demo.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +12,6 @@ public class CustomerController {
 
     @Autowired
     private CustomerService customerService;
-
-    @Autowired
-    private JwtUtils jwtUtils;
 
     @GetMapping("/order/{id}")
     public ResponseEntity<ViewOrderDto> getAnOrder(
@@ -34,13 +30,6 @@ public class CustomerController {
     public ResponseEntity<ViewOrderDto> payAnOrder(
             @RequestHeader("Authorization") String jwtToken, @PathVariable ("id") Long orderId) {
         return customerService.payAnOrder(jwtToken, orderId);
-    }
-
-    @GetMapping("/token")
-    @PreAuthorize("hasRole('MODERATOR') or hasRole('USER')")
-    public String showToken(@RequestHeader("Authorization") String jwtToken) {
-        String parsedToken = jwtToken.substring(7);
-        return jwtUtils.getUserNameFromJwtToken(parsedToken);
     }
 
 }
