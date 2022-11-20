@@ -66,7 +66,7 @@ public class AuthServiceImpl implements AuthService {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-        log.info("LOGGED Customer[LOGIN: {}, PASSWORD: {}",
+        log.info("LOGGED Customer[LOGIN: {}, PASSWORD: {}]",
                 loginRequest.getUsername(), loginRequest.getPassword());
 
         return ResponseEntity.ok(new JwtResponse(jwt,
@@ -133,7 +133,7 @@ public class AuthServiceImpl implements AuthService {
         customer.setRoles(roles);
         customerRepository.save(customer);
 
-        log.info("CREATED Customer[NAME: {}, EMAIL: {}",
+        log.info("CREATED Customer[NAME: {}, EMAIL: {}]",
                 customer.getCustomerName(), customer.getCustomerEmail());
 
         return ResponseEntity.ok("Customer created!");

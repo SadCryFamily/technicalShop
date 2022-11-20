@@ -90,4 +90,20 @@
         </insert>
     </changeSet>
 
+    <changeSet id="7" author="Semen Gulenko">
+        <createTable tableName="customer_orders">
+            <column name="id" type="bigserial">
+                <constraints primaryKeyName="pk_customer_orders_id" primaryKey="true"/>
+            </column>
+
+            <column name="customer_id" type="bigint">
+                <constraints foreignKeyName="fk_customer_id" references="customer(id)"/>
+            </column>
+
+            <column name="order_id" type="bigint">
+                <constraints foreignKeyName="fk_order_id" references="orders(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
 </databaseChangeLog>

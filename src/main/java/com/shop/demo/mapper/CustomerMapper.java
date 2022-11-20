@@ -1,10 +1,13 @@
 package com.shop.demo.mapper;
 
+import com.shop.demo.auth.entity.Role;
 import com.shop.demo.dto.CreateCustomerDto;
 import com.shop.demo.enitity.Customer;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+
+import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface CustomerMapper {
@@ -15,5 +18,7 @@ public interface CustomerMapper {
     @Mapping(source = "email", target = "customerEmail")
     @Mapping(source = "password", target = "customerPassword")
     Customer toCustomer(CreateCustomerDto customerDto);
+
+    Role map(String value);
 
 }

@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -37,5 +39,21 @@ public class Customer {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+
+    @Column(name = "order_id")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "customer_orders",
+            joinColumns = @JoinColumn(name = "customer_id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id")
+    )
+    private Set<Order> orders = new HashSet<>();
+
+    public void addOrder(Order order) {
+        orders.add(order);
+    }
+
+    public void deleteOrder(Order order) {
+        orders.remove(order);
+    }
 
 }
