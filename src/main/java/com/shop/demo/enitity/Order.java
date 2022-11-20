@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -13,7 +15,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class Order implements Comparable<Order> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,4 +34,16 @@ public class Order {
     @Column(name = "is_payed")
     private boolean isPayed;
 
+    @ManyToMany(mappedBy = "orders")
+    private Set<Customer> customers = new HashSet<>();
+
+    public void addCustomer(Customer customer) {
+        customers.add(customer);
+        customer.getOrders().add(this);
+    }
+
+    @Override
+    public int compareTo(Order o) {
+        return o.getOrderId().compareTo(this.getOrderId());
+    }
 }

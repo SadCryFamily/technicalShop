@@ -41,7 +41,7 @@ public class Customer {
 
 
     @Column(name = "order_id")
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "customer_orders",
             joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "order_id")
@@ -50,10 +50,6 @@ public class Customer {
 
     public void addOrder(Order order) {
         orders.add(order);
-    }
-
-    public void deleteOrder(Order order) {
-        orders.remove(order);
     }
 
 }
